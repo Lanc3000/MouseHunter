@@ -1,0 +1,19 @@
+CREATE SCHEMA `mousedb` ;
+
+CREATE TABLE `mousedb`.`users_tab` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+USE mousedb;
+
+Insert users_tab(login, password) Values('user', '12345');
+Insert users_tab(login, password) Values('admin', 'root');
+
+CREATE TABLE `mousedb`.`events_tab` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `date` DATETIME NULL,
+  `event` VARCHAR(100) NULL,
+  `coordinates` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));

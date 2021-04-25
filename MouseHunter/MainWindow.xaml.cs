@@ -24,15 +24,27 @@ namespace MouseHunter
         {
             InitializeComponent();
         }
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Point point = e.GetPosition(this);
-            MessageBox.Show($"x = {point.X.ToString()}, y = {point.Y.ToString()}");
+            if (LoginBox.Text == "user" && PasswordBox.Password == "12345")
+            {
+                ClientWindow clientWindow = new ClientWindow();
+                clientWindow.Show();
+                
+                LoginScreen.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                LoginMessageBlock.Text = "Неверный пароль или логин!";
+                LoginMessageBlock.Visibility = Visibility.Visible;
+            }
         }
-        private void startBtn_Click(object sender, RoutedEventArgs e)
+        private void Open(Border screen)
         {
-            Point point = Mouse.GetPosition(displayArea);
-            coordinateTb.Text = "X: " + point.X + ", Y: " + point.Y;
+            LoginScreen.Visibility = Visibility.Hidden;
+            //добавить экран админа = hidden
+            screen.Visibility = Visibility.Visible;
         }
     }
 }

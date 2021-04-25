@@ -6,32 +6,67 @@
         xmlns:local="clr-namespace:MouseHunter"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="displayArea">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Дата" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Время" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Событие" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Координаты"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBox x:Name="dateTb" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Width="120" Margin="10"/>
-        <TextBox x:Name="timeTb" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Width="120" Margin="10"/>
-        <TextBox x:Name="contentTb" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Width="120" Margin="10"/>
-        <TextBox x:Name="coordinateTb" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Width="120" Margin="10"/>
-        <Button x:Name="startBtn" Content="Start" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Width="120" Margin="10" Click="startBtn_Click"/>
-    </Grid>
+    <Window.Resources>
+        <Style x:Key="Screen">
+            <Style.Setters>
+                <Setter Property="Border.Visibility" Value="Hidden"/>
+                <Setter Property="Border.Background" Value="#151515"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="LoginPanel">
+            <Style.Setters>
+                <Setter Property="StackPanel.Orientation" Value="Vertical"/>
+                <Setter Property="StackPanel.VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="TextBoxBase">
+            <Style.Setters>
+                <Setter Property="TextBox.Background" Value="#333" />
+                <Setter Property="TextBox.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBox.Margin" Value="5"/>
+                <Setter Property="TextBox.Padding" Value="15 10"/>
+                <Setter Property="TextBox.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBox.Width" Value="250" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="HeaderBlock">
+            <Style.Setters>
+                <Setter Property="TextBlock.FontSize" Value="16" />
+                <Setter Property="TextBlock.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBlock.Margin" Value="5"/>
+                <Setter Property="TextBlock.Padding" Value="15 10"/>
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBlock.Width" Value="250" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="WarningBlock">
+            <Style.Setters>
+                <Setter Property="TextBlock.FontSize" Value="16" />
+                <Setter Property="TextBlock.Foreground" Value="#FF0000" />
+                <Setter Property="TextBlock.Margin" Value="5"/>
+                <Setter Property="TextBlock.Padding" Value="15 10"/>
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBlock.Width" Value="250" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="ButtonBase" >
+            <Style.Setters>
+                <Setter Property="Button.Background" Value="#333" />
+                <Setter Property="Button.Foreground" Value="#f6f6f6" />
+                <Setter Property="Button.Margin" Value="5"/>
+                <Setter Property="Button.Padding" Value="50 10"/>
+                <Setter Property="Button.HorizontalAlignment" Value="Center" />
+                <Setter Property="Button.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource Screen}" Name="LoginScreen" Visibility="Visible">
+        <StackPanel Style="{StaticResource LoginPanel}">
+            <TextBlock Text="Login" Style="{StaticResource HeaderBlock}" />
+            <TextBox Style="{StaticResource TextBoxBase}" Name="LoginBox"/>
+            <PasswordBox Style="{StaticResource TextBoxBase}" Name="PasswordBox"/>
+            <Button Content="Ввод" Style="{StaticResource ButtonBase}" Name="LoginButton" Click="LoginButton_Click" IsDefault="True"/>
+            <TextBlock Text="" Name="LoginMessageBlock" Style="{StaticResource WarningBlock}" Visibility="Hidden"/>
+        </StackPanel>
+    </Border>
 </Window>

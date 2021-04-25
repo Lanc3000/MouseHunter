@@ -13,3 +13,5 @@ D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.csproj.Gener
 D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.csproj.CoreCompileInputs.cache
 D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.exe
 D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.pdb
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\ClientWindow.g.cs
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\ClientWindow.baml
