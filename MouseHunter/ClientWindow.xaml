@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MouseHunter"
         mc:Ignorable="d"
+        MouseMove="Grid_MouseMove"
+        x:Name="displayArea"
         Title="ClientWindow" Height="450" Width="800">
-    <Grid x:Name="displayArea">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>

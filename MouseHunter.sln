@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseHunter", "MouseHunter\MouseHunter.csproj", "{7DB900E5-9D89-4A93-8552-0EA1E8061B5C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5} = {BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseServer", "MouseServer\MouseServer.csproj", "{F736AAE1-195D-461A-A8B8-8C65B1F3508C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfMouceService", "WcfMouceService\WcfMouceService.csproj", "{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,10 @@ Global
 		{7DB900E5-9D89-4A93-8552-0EA1E8061B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB900E5-9D89-4A93-8552-0EA1E8061B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB900E5-9D89-4A93-8552-0EA1E8061B5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F736AAE1-195D-461A-A8B8-8C65B1F3508C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F736AAE1-195D-461A-A8B8-8C65B1F3508C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F736AAE1-195D-461A-A8B8-8C65B1F3508C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F736AAE1-195D-461A-A8B8-8C65B1F3508C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFAB7F25-BF06-4C79-B6B6-404AC7A88DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

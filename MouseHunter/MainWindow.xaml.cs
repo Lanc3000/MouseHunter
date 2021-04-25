@@ -27,24 +27,23 @@ namespace MouseHunter
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginBox.Text == "user" && PasswordBox.Password == "12345")
+            ServiceReference.Service1Client service = new ServiceReference.Service1Client();
+            try
             {
-                ClientWindow clientWindow = new ClientWindow();
-                clientWindow.Show();
-                
-                LoginScreen.Visibility = Visibility.Hidden;
+                if (service.Authorization(LoginBox.Text, PasswordBox.Password)) {
+                    ClientWindow clientWindow = new ClientWindow();
+                    clientWindow.Show();
+                    
+                    LoginScreen.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    LoginMessageBlock.Text = "Неверный пароль или логин!";
+                    LoginMessageBlock.Visibility = Visibility.Visible;
+                }
             }
-            else
-            {
-                LoginMessageBlock.Text = "Неверный пароль или логин!";
-                LoginMessageBlock.Visibility = Visibility.Visible;
-            }
+            catch (Exception) { } 
         }
-        private void Open(Border screen)
-        {
-            LoginScreen.Visibility = Visibility.Hidden;
-            //добавить экран админа = hidden
-            screen.Visibility = Visibility.Visible;
-        }
+
     }
 }
