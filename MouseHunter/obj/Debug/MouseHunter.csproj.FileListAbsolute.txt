@@ -1,0 +1,15 @@
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.csprojAssemblyReference.cache
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MainWindow.g.cs
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\App.g.cs
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter_MarkupCompile.cache
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter_MarkupCompile.lref
+D:\Учёба\Working\MouseHunter\MouseHunter\bin\Debug\MouseHunter.exe.config
+D:\Учёба\Working\MouseHunter\MouseHunter\bin\Debug\MouseHunter.exe
+D:\Учёба\Working\MouseHunter\MouseHunter\bin\Debug\MouseHunter.pdb
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MainWindow.baml
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.g.resources
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.Properties.Resources.resources
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.csproj.GenerateResource.cache
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.csproj.CoreCompileInputs.cache
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.exe
+D:\Учёба\Working\MouseHunter\MouseHunter\obj\Debug\MouseHunter.pdb
