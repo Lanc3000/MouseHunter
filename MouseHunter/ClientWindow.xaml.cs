@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MouseHunter.Model;
 
 namespace MouseHunter
 {
@@ -20,36 +21,96 @@ namespace MouseHunter
     /// </summary>
     public partial class ClientWindow : Window
     {
-        
+        List<MouseEv> list = new List<MouseEv>();
+        double startX = 150;
+        double startY = 150;
         public ClientWindow()
         {
             InitializeComponent();
             
         }
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void displayArea_MouseRightDown(object sender, MouseButtonEventArgs e)
         {
+            string mes = "ПКМ нажата";
+            DateTime dateTime = DateTime.Now;
             Point point = e.GetPosition(this);
-            MessageBox.Show($"x = {point.X.ToString()}, y = {point.Y.ToString()}");
+
+            list.Add(new MouseEv()
+            {
+                DateTime = dateTime,
+                Content = mes,
+                Coordinate = mess(mes, point, dateTime)
+            });
         }
-        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        private void displayArea_MouseLeftDown(object sender, MouseButtonEventArgs e)
         {
+            string mes = "ЛКМ нажата";
+            DateTime dateTime = DateTime.Now;
             Point point = e.GetPosition(this);
-            Point locationBtn = startBtn.PointToScreen(new Point(0, 0)); // зададим начальные координаты для отчета смещения мыши
-            double startX = locationBtn.X;
-            double startY = locationBtn.Y;
+
+            list.Add(new MouseEv() { DateTime = dateTime, 
+                                     Content = mes, 
+                                     Coordinate = mess(mes, point, dateTime) 
+            });
+        }
+        private void displayArea_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            string mes = "CКМ нажата"; //реагирует на кручение колеса, не на нажатеие (((
+            DateTime dateTime = DateTime.Now;
+            Point point = e.GetPosition(this);
+
+            list.Add(new MouseEv()
+            {
+                DateTime = dateTime,
+                Content = mes,
+                Coordinate = mess(mes, point, dateTime)
+            });
+        }
+        private void displayArea_MouseMove(object sender, MouseEventArgs e)
+        {
+            string mes = "Мышь сдвинулась";
+            DateTime dateTime = DateTime.Now;
+            Point point = e.GetPosition(this);
+            //Point locationBtn = startBtn.PointToScreen(new Point(0, 0)); // зададим начальные координаты для отчета смещения мыши
+            
             double x = point.X;
             double y = point.Y;
+
             if (Math.Abs(startX - x) > 100 || Math.Abs(startY - y) > 100)
             {
-                coordinateTb.Text = $"x = {point.X.ToString()}, y = {point.Y.ToString()}";
-                startX = point.X;
-                startY = point.Y;
+                //list.Add(new MouseEv()
+                //{
+                //    DateTime = dateTime,
+                //    Content = mes,
+                //    Coordinate = mess(mes, point, dateTime)
+                //});
+
+                mess(mes, point, dateTime);
+
             }
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            ServiceReference.Service1Client service = new ServiceReference.Service1Client();
+            try
+            {
+                foreach(var ev in list)
+                {
+                    service.Insert(ev.DateTime, ev.Content, ev.Coordinate);
+                }
+            }
+            catch (Exception) { }
             
         }
+        public string mess(string m, Point p, DateTime time)
+        {
+            string coord = $"x = {p.X.ToString()}, y = {p.Y.ToString()}";
+            coordinateTb.Text = coord;
+            contentTb.Text = $"{m}";
+            dateTb.Text = time.ToString();
+            return coord;
+        }
+
+
     }
 }

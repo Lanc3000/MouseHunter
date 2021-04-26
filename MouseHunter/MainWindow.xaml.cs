@@ -30,11 +30,11 @@ namespace MouseHunter
             ServiceReference.Service1Client service = new ServiceReference.Service1Client();
             try
             {
-                if (service.Authorization(LoginBox.Text, PasswordBox.Password)) {
+                if (service.Authorization(LoginBox.Text, PasswordBox.Password)) 
+                {
                     ClientWindow clientWindow = new ClientWindow();
                     clientWindow.Show();
-                    
-                    LoginScreen.Visibility = Visibility.Hidden;
+                    this.Close();
                 }
                 else
                 {

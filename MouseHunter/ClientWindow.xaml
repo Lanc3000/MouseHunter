@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MouseHunter"
         mc:Ignorable="d"
-        MouseMove="Grid_MouseMove"
+        MouseMove="displayArea_MouseMove"
+        MouseRightButtonDown="displayArea_MouseRightDown"
+        MouseLeftButtonDown="displayArea_MouseLeftDown"
+        MouseWheel="displayArea_MouseWheel"
         x:Name="displayArea"
         Title="ClientWindow" Height="450" Width="800">
     <Grid >
