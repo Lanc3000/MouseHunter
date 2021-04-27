@@ -41,6 +41,7 @@ namespace MouseHunter
                 Content = mes,
                 Coordinate = mess(mes, point, dateTime)
             });
+            countLbl.Content = list.Count().ToString();
         }
         private void displayArea_MouseLeftDown(object sender, MouseButtonEventArgs e)
         {
@@ -52,6 +53,7 @@ namespace MouseHunter
                                      Content = mes, 
                                      Coordinate = mess(mes, point, dateTime) 
             });
+            countLbl.Content = list.Count().ToString();
         }
         private void displayArea_MouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -65,6 +67,7 @@ namespace MouseHunter
                 Content = mes,
                 Coordinate = mess(mes, point, dateTime)
             });
+            countLbl.Content = list.Count().ToString();
         }
         private void displayArea_MouseMove(object sender, MouseEventArgs e)
         {
@@ -76,7 +79,7 @@ namespace MouseHunter
             double x = point.X;
             double y = point.Y;
 
-            if (Math.Abs(startX - x) > 100 || Math.Abs(startY - y) > 100)
+            if (Math.Abs(startX - x) > 10 || Math.Abs(startY - y) > 10)
             {
                 //list.Add(new MouseEv()
                 //{
@@ -86,7 +89,7 @@ namespace MouseHunter
                 //});
 
                 mess(mes, point, dateTime);
-
+                countLbl.Content = list.Count().ToString();
             }
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)

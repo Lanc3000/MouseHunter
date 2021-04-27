@@ -34,6 +34,7 @@ namespace WcfMouceService
 
         public void Insert(DateTime date, string ev, string coord)
         {
+            Console.WriteLine("Идет запись в БД");
             string sqlMsq = "Insert into events_tab (date, event, coordinates) values(@date, @event, @coordinates)";
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -42,6 +43,9 @@ namespace WcfMouceService
                 comd.Parameters.AddWithValue("@date", date);
                 comd.Parameters.AddWithValue("@event", ev);
                 comd.Parameters.AddWithValue("@coordinates", coord);
+
+                int num = comd.ExecuteNonQuery();
+                Console.WriteLine($"Добавлено объектов: {num}");
             }
         }
     }

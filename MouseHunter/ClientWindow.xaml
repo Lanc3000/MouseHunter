@@ -25,18 +25,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Дата" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Время" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Событие" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
-        <TextBlock Text="Координаты"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
+        <TextBlock Text="Событие" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
+        <TextBlock Text="Координаты"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
         <TextBox x:Name="dateTb" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                  Width="120" Margin="10"/>
-        <TextBox x:Name="timeTb" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox x:Name="contentTb" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                  Width="120" Margin="10"/>
-        <TextBox x:Name="contentTb" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Width="120" Margin="10"/>
-        <TextBox x:Name="coordinateTb" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox x:Name="coordinateTb" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  Width="120" Margin="10"/>
         <Button x:Name="startBtn" Content="Start" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Width="120" Margin="10" Click="startBtn_Click"/>
+        <TextBlock Text="Количество записей:"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
+        <Label x:Name="countLbl" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Margin="10"/>
     </Grid>
 </Window>
