@@ -27,19 +27,20 @@ namespace MouseHunter
         public ClientWindow()
         {
             InitializeComponent();
-            
+            //dgEventsList.ItemsSource = list; // привязываем источник
         }
         private void displayArea_MouseRightDown(object sender, MouseButtonEventArgs e)
         {
             string mes = "ПКМ нажата";
+            
             DateTime dateTime = DateTime.Now;
-            Point point = e.GetPosition(this);
+            Point p = e.GetPosition(this);
 
             list.Add(new MouseEv()
             {
                 DateTime = dateTime,
                 Content = mes,
-                Coordinate = mess(mes, point, dateTime)
+                Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
             });
             countLbl.Content = list.Count().ToString();
         }
@@ -47,26 +48,28 @@ namespace MouseHunter
         {
             string mes = "ЛКМ нажата";
             DateTime dateTime = DateTime.Now;
-            Point point = e.GetPosition(this);
+            Point p = e.GetPosition(this);
 
-            list.Add(new MouseEv() { DateTime = dateTime, 
-                                     Content = mes, 
-                                     Coordinate = mess(mes, point, dateTime) 
-            });
+            list.Add(new MouseEv()
+            {
+                DateTime = dateTime,
+                Content = mes,
+                Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
+            }); 
             countLbl.Content = list.Count().ToString();
         }
         private void displayArea_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             string mes = "CКМ нажата"; //реагирует на кручение колеса, не на нажатеие (((
             DateTime dateTime = DateTime.Now;
-            Point point = e.GetPosition(this);
+            Point p = e.GetPosition(this);
 
             list.Add(new MouseEv()
             {
                 DateTime = dateTime,
                 Content = mes,
-                Coordinate = mess(mes, point, dateTime)
-            });
+                Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
+            }); 
             countLbl.Content = list.Count().ToString();
         }
         private void displayArea_MouseMove(object sender, MouseEventArgs e)
@@ -88,12 +91,13 @@ namespace MouseHunter
                 //    Coordinate = mess(mes, point, dateTime)
                 //});
 
-                mess(mes, point, dateTime);
+                //mess(mes, point, dateTime);
                 countLbl.Content = list.Count().ToString();
             }
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
+            dgEventsList.ItemsSource = list;
             ServiceReference.Service1Client service = new ServiceReference.Service1Client();
             try
             {
@@ -105,14 +109,14 @@ namespace MouseHunter
             catch (Exception) { }
             
         }
-        public string mess(string m, Point p, DateTime time)
-        {
-            string coord = $"x = {p.X.ToString()}, y = {p.Y.ToString()}";
-            coordinateTb.Text = coord;
-            contentTb.Text = $"{m}";
-            dateTb.Text = time.ToString();
-            return coord;
-        }
+        //public string mess(string m, Point p, DateTime time)
+        //{
+        //    string coord = $"x = {p.X.ToString()}, y = {p.Y.ToString()}";
+        //    coordinateTb.Text = coord;
+        //    contentTb.Text = $"{m}";
+        //    dateTb.Text = time.ToString();
+        //    return coord;
+        //}
 
 
     }
