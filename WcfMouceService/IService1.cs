@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Data;
 
 
 namespace WcfMouceService
@@ -18,14 +19,17 @@ namespace WcfMouceService
         bool Authorization(string log, string pas);
 
         [OperationContract]
-        void Insert(DateTime date, string ev, string coord);
+        void Insert(MouseEv mouse);
+
+        [OperationContract]
+        DataTable LoadFromDB();
 
     }
 
 
 
     [DataContract]
-    public class InsertMouseEvent
+    public class MouseEv
     {
         DateTime date;
         string mouseEvent = string.Empty;

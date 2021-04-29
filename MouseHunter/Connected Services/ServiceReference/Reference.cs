@@ -22,10 +22,16 @@ namespace MouseHunter.ServiceReference {
         System.Threading.Tasks.Task<bool> AuthorizationAsync(string log, string pas);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Insert", ReplyAction="http://tempuri.org/IService1/InsertResponse")]
-        void Insert(System.DateTime date, string ev, string coord);
+        void Insert(WcfMouceService.MouseEv mouse);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Insert", ReplyAction="http://tempuri.org/IService1/InsertResponse")]
-        System.Threading.Tasks.Task InsertAsync(System.DateTime date, string ev, string coord);
+        System.Threading.Tasks.Task InsertAsync(WcfMouceService.MouseEv mouse);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
+        System.Data.DataTable LoadFromDB();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
+        System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,12 +69,20 @@ namespace MouseHunter.ServiceReference {
             return base.Channel.AuthorizationAsync(log, pas);
         }
         
-        public void Insert(System.DateTime date, string ev, string coord) {
-            base.Channel.Insert(date, ev, coord);
+        public void Insert(WcfMouceService.MouseEv mouse) {
+            base.Channel.Insert(mouse);
         }
         
-        public System.Threading.Tasks.Task InsertAsync(System.DateTime date, string ev, string coord) {
-            return base.Channel.InsertAsync(date, ev, coord);
+        public System.Threading.Tasks.Task InsertAsync(WcfMouceService.MouseEv mouse) {
+            return base.Channel.InsertAsync(mouse);
+        }
+        
+        public System.Data.DataTable LoadFromDB() {
+            return base.Channel.LoadFromDB();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync() {
+            return base.Channel.LoadFromDBAsync();
         }
     }
 }

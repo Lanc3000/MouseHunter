@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MouseHunter.Model;
+using MouseHunter.ServiceReference;
+using WcfMouceService;
 
 namespace MouseHunter
 {
@@ -22,12 +23,17 @@ namespace MouseHunter
     public partial class ClientWindow : Window
     {
         List<MouseEv> list = new List<MouseEv>();
+        
         double startX = 150;
         double startY = 150;
         public ClientWindow()
         {
             InitializeComponent();
-            //dgEventsList.ItemsSource = list; // привязываем источник
+        }
+        private void displayArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            ServiceReference.Service1Client service = new ServiceReference.Service1Client();
+            dgEventsList.ItemsSource = service.LoadFromDB().DefaultView;
         }
         private void displayArea_MouseRightDown(object sender, MouseButtonEventArgs e)
         {
@@ -38,8 +44,8 @@ namespace MouseHunter
 
             list.Add(new MouseEv()
             {
-                DateTime = dateTime,
-                Content = mes,
+                Date = dateTime,
+                MouseEvent = mes,
                 Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
             });
             countLbl.Content = list.Count().ToString();
@@ -52,8 +58,8 @@ namespace MouseHunter
 
             list.Add(new MouseEv()
             {
-                DateTime = dateTime,
-                Content = mes,
+                Date = dateTime,
+                MouseEvent = mes,
                 Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
             }); 
             countLbl.Content = list.Count().ToString();
@@ -66,8 +72,8 @@ namespace MouseHunter
 
             list.Add(new MouseEv()
             {
-                DateTime = dateTime,
-                Content = mes,
+                Date = dateTime,
+                MouseEvent = mes,
                 Coordinate = $"x = {p.X.ToString()}, y = {p.Y.ToString()}"
             }); 
             countLbl.Content = list.Count().ToString();
@@ -97,18 +103,20 @@ namespace MouseHunter
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            dgEventsList.ItemsSource = list;
+           
             ServiceReference.Service1Client service = new ServiceReference.Service1Client();
             try
             {
                 foreach(var ev in list)
                 {
-                    service.Insert(ev.DateTime, ev.Content, ev.Coordinate);
+                    service.Insert(ev);
                 }
             }
             catch (Exception) { }
             
         }
+
+
         //public string mess(string m, Point p, DateTime time)
         //{
         //    string coord = $"x = {p.X.ToString()}, y = {p.Y.ToString()}";

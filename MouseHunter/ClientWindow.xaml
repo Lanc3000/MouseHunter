@@ -10,8 +10,8 @@
         MouseLeftButtonDown="displayArea_MouseLeftDown"
         MouseWheel="displayArea_MouseWheel"
         x:Name="displayArea"
-        Title="ClientWindow" Height="450" Width="800">
-    <Grid Background="#151515">
+        Title="ClientWindow" Height="450" Width="800" Loaded="displayArea_Loaded">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>

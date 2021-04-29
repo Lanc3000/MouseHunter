@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace WcfMouceService
@@ -12,6 +13,7 @@ namespace WcfMouceService
     public class Service1 : IService1
     {
         private string connectionString = "server=localhost;user=root;database=mousedb;password=root;";
+        DataTable eventsTable;
         
         public bool Authorization(string log, string pas)
         {
@@ -24,28 +26,49 @@ namespace WcfMouceService
                 string check = command.ExecuteScalar().ToString();
                 if (check == pas)
                 {
-                    Console.WriteLine("Аутентификация прошла успешно!");
-                    
+                    Console.WriteLine("Аутентификация прошла успешно!"); 
                     return true;
                 }
             }
             return false;
         }
 
-        public void Insert(DateTime date, string ev, string coord)
+        public void Insert(MouseEv mouse)
         {
             Console.WriteLine("Идет запись в БД");
-            string sqlMsq = "Insert into events_tab (date, event, coordinates) values(@date, @event, @coordinates)";
+            string sqlMsg = "INSERT INTO events_tab (date, event, coordinates) VAlUES (@date, @event, @coordinates)";
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand comd = new MySqlCommand(sqlMsq, conn);
-                comd.Parameters.AddWithValue("@date", date);
-                comd.Parameters.AddWithValue("@event", ev);
-                comd.Parameters.AddWithValue("@coordinates", coord);
+                MySqlCommand comd = new MySqlCommand(sqlMsg, conn);
+                comd.Parameters.AddWithValue("@date", mouse.Date);
+                comd.Parameters.AddWithValue("@event", mouse.MouseEvent);
+                comd.Parameters.AddWithValue("@coordinates", mouse.Coordinate);
 
                 int num = comd.ExecuteNonQuery();
                 Console.WriteLine($"Добавлено объектов: {num}");
+            }
+        }
+
+        public DataTable LoadFromDB()
+        {
+            string sqlMsg = "SELECT * FROM events_tab";
+            eventsTable = new DataTable();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlMsg, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                adapter.InsertCommand = new MySqlCommand("sp_InsertEvents", conn);
+                adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@data", MySqlDbType.DateTime, 0, "DateTime"));
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@event", MySqlDbType.VarChar, 100, "Content"));
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@coordinates", MySqlDbType.VarChar, 100, "Coordinate"));
+                MySqlParameter parametr = adapter.InsertCommand.Parameters.Add("@id", MySqlDbType.Int32, 0, "id");
+                parametr.Direction = ParameterDirection.Output;
+
+                conn.Open();
+                adapter.Fill(eventsTable);
+                return eventsTable;
             }
         }
     }
