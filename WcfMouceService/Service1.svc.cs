@@ -33,6 +33,23 @@ namespace WcfMouceService
             return false;
         }
 
+        public GetEventData GetInfo()
+        {
+            GetEventData eventData = new GetEventData();
+            string sqlMsg = "SELECT * FROM events_tab";
+            eventsTable = new DataTable();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sqlMsg, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                eventData.EventTable = dataTable;
+                return eventData;
+            }
+        }
+
         public void Insert(MouseEv mouse)
         {
             Console.WriteLine("Идет запись в БД");
@@ -50,7 +67,7 @@ namespace WcfMouceService
             }
         }
 
-        public DataTable LoadFromDB()
+        public DataView LoadFromDB()
         {
             string sqlMsg = "SELECT * FROM events_tab";
             eventsTable = new DataTable();
@@ -68,7 +85,7 @@ namespace WcfMouceService
 
                 conn.Open();
                 adapter.Fill(eventsTable);
-                return eventsTable;
+                return eventsTable.DefaultView;
             }
         }
     }

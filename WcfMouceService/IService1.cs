@@ -22,11 +22,18 @@ namespace WcfMouceService
         void Insert(MouseEv mouse);
 
         [OperationContract]
-        DataTable LoadFromDB();
+        DataView LoadFromDB();
 
+        [OperationContract]
+        GetEventData GetInfo();
     }
 
-
+    [DataContract]
+    public class GetEventData
+    {
+        [DataMember]
+        public DataTable EventTable { get; set; }
+    }
 
     [DataContract]
     public class MouseEv

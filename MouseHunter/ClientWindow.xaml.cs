@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace MouseHunter
     public partial class ClientWindow : Window
     {
         List<MouseEv> list = new List<MouseEv>();
+        bool btnFlag = false; // флаг для кнопки старт/стоп
         
         double startX = 150;
         double startY = 150;
@@ -33,7 +35,10 @@ namespace MouseHunter
         private void displayArea_Loaded(object sender, RoutedEventArgs e)
         {
             ServiceReference.Service1Client service = new ServiceReference.Service1Client();
-            dgEventsList.ItemsSource = service.LoadFromDB().DefaultView;
+            DataTable dataTable = new DataTable();
+            dataTable = service.GetInfo().EventTable;
+            dgEventsList.ItemsSource = dataTable.DefaultView;
+           
         }
         private void displayArea_MouseRightDown(object sender, MouseButtonEventArgs e)
         {

@@ -28,10 +28,19 @@ namespace MouseHunter.ServiceReference {
         System.Threading.Tasks.Task InsertAsync(WcfMouceService.MouseEv mouse);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
-        System.Data.DataTable LoadFromDB();
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfMouceService.MouseEv))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfMouceService.GetEventData))]
+        object[] LoadFromDB();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
-        System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync();
+        System.Threading.Tasks.Task<object[]> LoadFromDBAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInfo", ReplyAction="http://tempuri.org/IService1/GetInfoResponse")]
+        WcfMouceService.GetEventData GetInfo();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInfo", ReplyAction="http://tempuri.org/IService1/GetInfoResponse")]
+        System.Threading.Tasks.Task<WcfMouceService.GetEventData> GetInfoAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -77,12 +86,20 @@ namespace MouseHunter.ServiceReference {
             return base.Channel.InsertAsync(mouse);
         }
         
-        public System.Data.DataTable LoadFromDB() {
+        public object[] LoadFromDB() {
             return base.Channel.LoadFromDB();
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync() {
+        public System.Threading.Tasks.Task<object[]> LoadFromDBAsync() {
             return base.Channel.LoadFromDBAsync();
+        }
+        
+        public WcfMouceService.GetEventData GetInfo() {
+            return base.Channel.GetInfo();
+        }
+        
+        public System.Threading.Tasks.Task<WcfMouceService.GetEventData> GetInfoAsync() {
+            return base.Channel.GetInfoAsync();
         }
     }
 }
