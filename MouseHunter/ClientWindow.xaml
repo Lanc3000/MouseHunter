@@ -17,6 +17,8 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -33,20 +35,24 @@
                  Width="120" Margin="10"/>
         <TextBox x:Name="coordinateTb" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  Width="120" Margin="10"/>-->
-        <DataGrid x:Name="dgEventsList" SelectionUnit="Cell" IsReadOnly="True"
-                  AutoGenerateColumns="False" EnableRowVirtualization="True" 
-                  Grid.Row="1" Grid.ColumnSpan="4" Margin="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="dateColumn" Header="Дата" Binding="{Binding DateTime}" Width="Auto" />
-                <DataGridTextColumn x:Name="contentColumn" Header="Событие" Binding="{Binding Content}" Width="Auto"/>
-                <DataGridTextColumn x:Name="coordinateColumn" Header="Координаты" Binding="{Binding Coordinate}" Width="Auto"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        
+            <DataGrid x:Name="dgEventsList" SelectionUnit="Cell" IsReadOnly="True"
+                    AutoGenerateColumns="False" EnableRowVirtualization="True"
+                      VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
+                    Grid.Row="1" Grid.ColumnSpan="3" Margin="5,5,2,5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idColumn" Header="Id" Binding="{Binding id}" Width="Auto" />
+                    <DataGridTextColumn x:Name="dateColumn" Header="Дата" Binding="{Binding date}" Width="Auto" />
+                    <DataGridTextColumn x:Name="contentColumn" Header="Событие" Binding="{Binding event}" Width="Auto"/>
+                    <DataGridTextColumn x:Name="coordinateColumn" Header="Координаты" Binding="{Binding coordinates}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        
         <Button x:Name="startBtn" Content="Start" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Width="120" Margin="10" Click="startBtn_Click"/>
         <TextBlock Text="Количество записей:"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
-                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="10"/>
+                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="11,12,8.4,12"/>
         <Label x:Name="countLbl" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Margin="10"/>
+               Margin="11.6,15,8,15"/>
     </Grid>
 </Window>

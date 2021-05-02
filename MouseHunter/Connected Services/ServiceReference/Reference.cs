@@ -28,13 +28,10 @@ namespace MouseHunter.ServiceReference {
         System.Threading.Tasks.Task InsertAsync(WcfMouceService.MouseEv mouse);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfMouceService.MouseEv))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfMouceService.GetEventData))]
-        object[] LoadFromDB();
+        System.Data.DataTable LoadFromDB();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LoadFromDB", ReplyAction="http://tempuri.org/IService1/LoadFromDBResponse")]
-        System.Threading.Tasks.Task<object[]> LoadFromDBAsync();
+        System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInfo", ReplyAction="http://tempuri.org/IService1/GetInfoResponse")]
         WcfMouceService.GetEventData GetInfo();
@@ -86,11 +83,11 @@ namespace MouseHunter.ServiceReference {
             return base.Channel.InsertAsync(mouse);
         }
         
-        public object[] LoadFromDB() {
+        public System.Data.DataTable LoadFromDB() {
             return base.Channel.LoadFromDB();
         }
         
-        public System.Threading.Tasks.Task<object[]> LoadFromDBAsync() {
+        public System.Threading.Tasks.Task<System.Data.DataTable> LoadFromDBAsync() {
             return base.Channel.LoadFromDBAsync();
         }
         

@@ -22,10 +22,12 @@ namespace WcfMouceService
         void Insert(MouseEv mouse);
 
         [OperationContract]
-        DataView LoadFromDB();
+        DataTable LoadFromDB();
 
         [OperationContract]
         GetEventData GetInfo();
+
+
     }
 
     [DataContract]
@@ -54,6 +56,7 @@ namespace WcfMouceService
             get { return mouseEvent; }
             set { mouseEvent = value; }
         }
+        [DataMember]
         public string Coordinate
         {
             get { return coordinate; }

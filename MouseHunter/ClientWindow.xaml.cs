@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,8 @@ namespace MouseHunter
     /// </summary>
     public partial class ClientWindow : Window
     {
-        List<MouseEv> list = new List<MouseEv>();
+        //List<MouseEv> list = new List<MouseEv>();
+        ObservableCollection<MouseEv> list = new ObservableCollection<MouseEv>(); 
         bool btnFlag = false; // флаг для кнопки старт/стоп
         
         double startX = 150;
@@ -36,13 +38,19 @@ namespace MouseHunter
         {
             ServiceReference.Service1Client service = new ServiceReference.Service1Client();
             DataTable dataTable = new DataTable();
-            dataTable = service.GetInfo().EventTable;
+            dataTable = service.LoadFromDB();
             dgEventsList.ItemsSource = dataTable.DefaultView;
-           
+
+            //GetEventData eventData = new GetEventData();
+            //eventData = service.GetInfo();
+            //DataTable dt = new DataTable();
+            //dt = eventData.EventTable;
+            //dgEventsList.DataContext = dt;
+
         }
         private void displayArea_MouseRightDown(object sender, MouseButtonEventArgs e)
         {
-            string mes = "ПКМ нажата";
+            string mes = "Right button pressed";
             
             DateTime dateTime = DateTime.Now;
             Point p = e.GetPosition(this);
@@ -57,7 +65,7 @@ namespace MouseHunter
         }
         private void displayArea_MouseLeftDown(object sender, MouseButtonEventArgs e)
         {
-            string mes = "ЛКМ нажата";
+            string mes = "Left button pressed";
             DateTime dateTime = DateTime.Now;
             Point p = e.GetPosition(this);
 
@@ -71,7 +79,7 @@ namespace MouseHunter
         }
         private void displayArea_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            string mes = "CКМ нажата"; //реагирует на кручение колеса, не на нажатеие (((
+            string mes = "Middle button pressed"; //реагирует на кручение колеса, не на нажатеие (((
             DateTime dateTime = DateTime.Now;
             Point p = e.GetPosition(this);
 
@@ -85,7 +93,7 @@ namespace MouseHunter
         }
         private void displayArea_MouseMove(object sender, MouseEventArgs e)
         {
-            string mes = "Мышь сдвинулась";
+            string mes = "Mouse moved";
             DateTime dateTime = DateTime.Now;
             Point point = e.GetPosition(this);
             //Point locationBtn = startBtn.PointToScreen(new Point(0, 0)); // зададим начальные координаты для отчета смещения мыши
@@ -118,6 +126,7 @@ namespace MouseHunter
                 }
             }
             catch (Exception) { }
+            
             
         }
 

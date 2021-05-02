@@ -62,7 +62,7 @@
     </Window.Resources>
     <Border Style="{StaticResource Screen}" Name="LoginScreen" Visibility="Visible">
         <StackPanel Style="{StaticResource LoginPanel}">
-            <TextBlock Text="Login" Style="{StaticResource HeaderBlock}" />
+            <TextBlock Text="Login" Style="{StaticResource HeaderBlock}" VerticalAlignment="Center" />
             <TextBox Style="{StaticResource TextBoxBase}" Name="LoginBox"/>
             <PasswordBox Style="{StaticResource TextBoxBase}" Name="PasswordBox"/>
             <Button Content="Ввод" Style="{StaticResource ButtonBase}" Name="LoginButton" Click="LoginButton_Click" IsDefault="True"/>

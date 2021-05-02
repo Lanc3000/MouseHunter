@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 
 namespace WcfMouceService
 {
+
     public class Service1 : IService1
     {
         private string connectionString = "server=localhost;user=root;database=mousedb;password=root;";
@@ -46,9 +47,12 @@ namespace WcfMouceService
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
                 eventData.EventTable = dataTable;
+                eventData.EventTable.TableName = "events_tab";
                 return eventData;
             }
         }
+
+
 
         public void Insert(MouseEv mouse)
         {
@@ -67,7 +71,7 @@ namespace WcfMouceService
             }
         }
 
-        public DataView LoadFromDB()
+        public DataTable LoadFromDB()
         {
             string sqlMsg = "SELECT * FROM events_tab";
             eventsTable = new DataTable();
@@ -77,15 +81,16 @@ namespace WcfMouceService
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 adapter.InsertCommand = new MySqlCommand("sp_InsertEvents", conn);
                 adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
-                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@data", MySqlDbType.DateTime, 0, "DateTime"));
-                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@event", MySqlDbType.VarChar, 100, "Content"));
-                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@coordinates", MySqlDbType.VarChar, 100, "Coordinate"));
-                MySqlParameter parametr = adapter.InsertCommand.Parameters.Add("@id", MySqlDbType.Int32, 0, "id");
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@date", MySqlDbType.DateTime, 0, "date"));
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@event", MySqlDbType.VarChar, 100, "event"));
+                adapter.InsertCommand.Parameters.Add(new MySqlParameter("@coordinates", MySqlDbType.VarChar, 100, "coordinates"));
+                MySqlParameter parametr = adapter.InsertCommand.Parameters.Add("@id", MySqlDbType.Int32, 0, "Id");
                 parametr.Direction = ParameterDirection.Output;
 
                 conn.Open();
                 adapter.Fill(eventsTable);
-                return eventsTable.DefaultView;
+                eventsTable.TableName = "events_tab";
+                return eventsTable;
             }
         }
     }
